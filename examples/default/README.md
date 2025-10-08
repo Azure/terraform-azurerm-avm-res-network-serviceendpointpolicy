@@ -13,10 +13,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.21"
     }
-    modtm = {
-      source  = "azure/modtm"
-      version = "~> 0.3"
-    }
     random = {
       source  = "hashicorp/random"
       version = "~> 3.5"
@@ -33,7 +29,7 @@ provider "azurerm" {
 # This allows us to randomize the region for the resource group.
 module "regions" {
   source  = "Azure/avm-utl-regions/azurerm"
-  version = "~> 0.1"
+  version = "0.9.0"
 
   is_recommended = true
 }
@@ -48,7 +44,7 @@ resource "random_integer" "region_index" {
 # This ensures we have unique CAF compliant names for our resources.
 module "naming" {
   source  = "Azure/naming/azurerm"
-  version = "~> 0.3"
+  version = "0.4.2"
 }
 
 # This is required for resource modules
@@ -59,7 +55,7 @@ resource "azurerm_resource_group" "this" {
 
 # Create a storage account to use in the policy definition
 resource "azurerm_storage_account" "this" {
-  account_replication_type  = "LRS"
+  account_replication_type  = "ZRS"
   account_tier              = "Standard"
   location                  = azurerm_resource_group.this.location
   name                      = module.naming.storage_account.name_unique
@@ -84,6 +80,7 @@ module "test" {
         "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
       ]
     },
+    # These are commented out as they conflict with the subscription scope definition
     # {
     #   name = "ResourceGroupScopeDefinition"
     #   service_resources = [
@@ -131,8 +128,6 @@ The following requirements are needed by this module:
 
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.21)
 
-- <a name="requirement_modtm"></a> [modtm](#requirement\_modtm) (~> 0.3)
-
 - <a name="requirement_random"></a> [random](#requirement\_random) (~> 3.5)
 
 ## Resources
@@ -179,13 +174,13 @@ The following Modules are called:
 
 Source: Azure/naming/azurerm
 
-Version: ~> 0.3
+Version: 0.4.2
 
 ### <a name="module_regions"></a> [regions](#module\_regions)
 
 Source: Azure/avm-utl-regions/azurerm
 
-Version: ~> 0.1
+Version: 0.9.0
 
 ### <a name="module_test"></a> [test](#module\_test)
 
