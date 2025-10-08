@@ -70,9 +70,6 @@ module "test" {
   name                = "se-${module.naming.subnet.name_unique}"
   resource_group_name = azurerm_resource_group.this.name
   enable_telemetry    = var.enable_telemetry
-  lock = {
-    kind = "CanNotDelete"
-  }
   policy_definitions = [
     {
       name = "SubscriptionScopeDefinition"
