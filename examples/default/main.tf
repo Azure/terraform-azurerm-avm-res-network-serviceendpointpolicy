@@ -6,10 +6,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.21"
     }
-    modtm = {
-      source  = "azure/modtm"
-      version = "~> 0.3"
-    }
     random = {
       source  = "hashicorp/random"
       version = "~> 3.5"
@@ -26,7 +22,7 @@ provider "azurerm" {
 # This allows us to randomize the region for the resource group.
 module "regions" {
   source  = "Azure/avm-utl-regions/azurerm"
-  version = "~> 0.1"
+  version = "0.9.0"
 
   is_recommended = true
 }
@@ -41,7 +37,7 @@ resource "random_integer" "region_index" {
 # This ensures we have unique CAF compliant names for our resources.
 module "naming" {
   source  = "Azure/naming/azurerm"
-  version = "~> 0.3"
+  version = "0.4.2"
 }
 
 # This is required for resource modules
@@ -52,7 +48,7 @@ resource "azurerm_resource_group" "this" {
 
 # Create a storage account to use in the policy definition
 resource "azurerm_storage_account" "this" {
-  account_replication_type  = "LRS"
+  account_replication_type  = "ZRS"
   account_tier              = "Standard"
   location                  = azurerm_resource_group.this.location
   name                      = module.naming.storage_account.name_unique
