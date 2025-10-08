@@ -73,6 +73,7 @@ module "test" {
         "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
       ]
     },
+    # These are commented out as they conflict with the subscription scope definition
     # {
     #   name = "ResourceGroupScopeDefinition"
     #   service_resources = [
