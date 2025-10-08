@@ -118,8 +118,9 @@ Default: `null`
 
 ### <a name="input_policy_definitions"></a> [policy\_definitions](#input\_policy\_definitions)
 
-Description: A map of policy definitions for the Service Endpoint Policy. Each definition specifies which Azure service resources are allowed. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.
+Description: A list of policy definitions for the Service Endpoint Policy. Each definition specifies which Azure service resources are allowed.
 
+- `name` - (Required) The name of the policy definition.
 - `service` - (Optional) The service for the policy definition. Defaults to `Microsoft.Storage`.
 - `service_resources` - (Required) A list of Azure Resource Manager IDs of the resources that this policy applies to. Can specify:
   - Individual storage accounts: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}`
@@ -128,14 +129,15 @@ Description: A map of policy definitions for the Service Endpoint Policy. Each d
 
 Example:
 ```terraform
-policy_definitions = {
-  allow-prod-storage = {
-    service     = "Microsoft.Storage"
+policy_definitions = [
+  {
+    name    = "StorageAccountScopeDefinition"
+    service = "Microsoft.Storage"
     service_resources = [
       "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-avm/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
     ]
   }
-}
+]
 ```
 
 Type:
