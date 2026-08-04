@@ -1,6 +1,14 @@
-output "private_endpoints" {
-  description = <<DESCRIPTION
-  A map of the private endpoints created.
-  DESCRIPTION
-  value       = var.private_endpoints_manage_dns_zone_group ? azurerm_private_endpoint.this_managed_dns_zone_groups : azurerm_private_endpoint.this_unmanaged_dns_zone_groups
+output "name" {
+  description = "The name of the Service Endpoint Policy."
+  value       = azapi_resource.service_endpoint_policy.name
+}
+
+output "resource_id" {
+  description = "The Azure Resource ID of the Service Endpoint Policy."
+  value       = azapi_resource.service_endpoint_policy.id
+}
+
+output "service_endpoint_policy_definitions" {
+  description = "All policy definitions on the Service Endpoint Policy."
+  value       = local.service_endpoint_policy_definitions_final
 }
