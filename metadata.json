@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/azure-verified-modules-tools/main/src/Avm.Authoring/Resources/Schemas/v1/avm-module-metadata.schema.json",
+  "moduleDisplayName": "Service Endpoint Policy",
+  "moduleDescription": "AVM Resource Module for Service Endpoint Policy",
+  "canonicalType": "Microsoft.Network/serviceEndpointPolicies",
+  "owners": [
+    "ASHR4"
+  ],
+  "telemetryIdPrefix": "46d3xtrf.res.c3c91f1"
+}
