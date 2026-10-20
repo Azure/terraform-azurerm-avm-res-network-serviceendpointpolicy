@@ -1,3 +1,3 @@
-# terraform-azurerm-avm-template
+# Service Endpoint Policy
 
-This is a template repo for Terraform Azure Verified Modules.
+AVM Resource Module for Service Endpoint Policy
